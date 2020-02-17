@@ -16,10 +16,18 @@ public class IsSubsequence {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.next();
         String t = scanner.next();
+
+
+
     }
 
     public boolean isSubsequence(String s, String t) {
-        return false;
+        String pattern = "[\\w]*";
+        for (int i = 0; i < s.length(); i++) {
+            pattern = pattern + s.charAt(i) + "[\\w]*";
+        }
+
+        return t.matches(pattern);
     }
 
 }
