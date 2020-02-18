@@ -2,7 +2,7 @@ package cc.before30.homeex.leetcode.issubsequence;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * IsSubsequenceTest
@@ -24,6 +24,15 @@ class IsSubsequenceTest {
         s = "axc";
         t = "ahbgdc";
         assertEquals(false, isSubsequence.isSubsequence(s, t));
+    }
 
+    @Test
+    void testWithEmpty() {
+        IsSubsequence isSubsequence = new IsSubsequence();
+
+        String s = "";
+        String t = "aaaaaaa";
+
+        assertEquals(true, isSubsequence.isSubsequence(s, t));
     }
 }
