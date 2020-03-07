@@ -1,3 +1,5 @@
 rootProject.name = 'homeex'
 include 'leetcode'
 include 'resilience4jex'
+include 'banking-app'
+
