@@ -6,7 +6,7 @@ import lombok.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,8 +30,10 @@ public class AccountService {
 
 
     public Account save(Account account) {
-        accountRepository.save(account);
-        return accountRepository.findByAccountNumberEquals(account.getAccountNumber());
+        // find by account number
+        // if null 이면 생성
+        // 아니면 에러
+        return accountRepository.save(account);
     }
 
     public List<Account> findAll() {
@@ -61,7 +63,12 @@ public class AccountService {
             accountRepository.save(fromAccount);
             toAccount.setCurrentBalance(toAccount.getCurrentBalance().add(amount));
             accountRepository.save(toAccount);
-            Transaction transaction = transactionRepository.save(new Transaction(0L, fromAccountNumber, amount, new Timestamp(System.currentTimeMillis())));
+            Transaction transaction = transactionRepository.save(
+                    Transaction.builder()
+                            .accountNumber(fromAccountNumber)
+                            .transactionAmount(amount)
+                            .transactionDateTime(LocalDateTime.now())
+                            .build());
             return transaction;
         }
         return null;

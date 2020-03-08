@@ -1,15 +1,13 @@
 package cc.before30.homeex.banking.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * Transaction
@@ -21,16 +19,21 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "transaction")
+@Table(name = "transactions")
+@Builder
 public class Transaction {
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private Long transactionId;
 
+    @Column(name = "account_number")
     private String accountNumber;
 
+    @Column(name = "amount")
     private BigDecimal transactionAmount;
 
-    private Timestamp transactionDateTime;
+    @Column(name = "datetime")
+    private LocalDateTime transactionDateTime;
 
 }
