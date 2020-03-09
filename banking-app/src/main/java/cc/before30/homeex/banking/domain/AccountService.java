@@ -65,7 +65,7 @@ public class AccountService {
             accountRepository.save(toAccount);
             Transaction transaction = transactionRepository.save(
                     Transaction.builder()
-                            .accountNumber(fromAccountNumber)
+                            .account(fromAccount)
                             .transactionAmount(amount)
                             .transactionDateTime(LocalDateTime.now())
                             .build());

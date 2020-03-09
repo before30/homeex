@@ -22,18 +22,29 @@ import java.time.LocalDateTime;
 @Table(name = "transactions")
 @Builder
 public class Transaction {
+
     @Id
     @GeneratedValue
-    @Column(name = "id")
+    @Column(name = "transaction_id")
     private Long transactionId;
 
     @Column(name = "account_number")
     private String accountNumber;
 
-    @Column(name = "amount")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(
+            name = "account_number",
+            referencedColumnName = "account_number",
+            insertable = false,
+            updatable = false
+    )
+    private Account account;
+
+    @Column(name = "transaction_amount")
     private BigDecimal transactionAmount;
 
-    @Column(name = "datetime")
+    @Column(name = "transaction_datetime",
+            columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime transactionDateTime;
 
 }
